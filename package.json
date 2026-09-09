@@ -1,0 +1,15 @@
+{
+  "name": "habitbridge-android",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HabitBridge: Intentional Friction & Micro-Swap — product design document (PRD/SDD) for a local-first Android screen-time app, plus a browser phone-simulator prototype of its policy engine and interceptor UX.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "python -m http.server 8080"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

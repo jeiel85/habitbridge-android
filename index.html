@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0f0e">
+  <title>HabitBridge — 도파민을 막지 말고 스왑하라 · 스마트 쉴드 폰 시뮬레이터 (웹 프로토타입)</title>
+  <meta name="description" content="HabitBridge: Intentional Friction & Micro-Swap. 스크린타임 차단 대신 1분 스트레칭·단어 1개·퀵 메모·감정 체크인으로 스왑하는 로컬 우선 안드로이드 앱 설계서와, 상황 인지형 쉴드를 체험하는 브라우저 폰 시뮬레이터.">
+  <meta property="og:title" content="HabitBridge — Intentional Friction & Micro-Swap">
+  <meta property="og:description" content="Don't just block dopamine. Swap it intentionally. Playable phone-simulator prototype of a local-first screen-time app.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b0f0e'/%3E%3Cpath d='M18 62 q32 -40 64 0' fill='none' stroke='%2334d399' stroke-width='9' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='62' r='7' fill='%2334d399'/%3E%3Ccircle cx='82' cy='62' r='7' fill='%2334d399'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="top">
+      <div class="brand">
+        <span class="logo" aria-hidden="true"></span>
+        <div>
+          <div class="brand-name">HabitBridge <span class="brand-sub" id="brand-sub">Intentional Friction &amp; Micro-Swap</span></div>
+          <div class="brand-tag" id="brand-tag"></div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="ghost" id="link-docs" href="https://github.com/jeiel85/habitbridge-android/blob/main/docs/PRD-SDD.md" target="_blank" rel="noopener"></a>
+        <a class="ghost" id="link-repo" href="https://github.com/jeiel85/habitbridge-android" target="_blank" rel="noopener"></a>
+        <button class="ghost" id="btn-lang" type="button">EN</button>
+      </div>
+    </header>
+
+    <p class="howto" id="howto"></p>
+
+    <main class="layout">
+      <section class="phone-col">
+        <div class="phone" id="phone">
+          <div class="notch" aria-hidden="true"></div>
+          <div class="statusbar"><span id="sb-time">10:15</span><span class="sb-right"><span id="sb-mode"></span> ▮▮▮ ◔</span></div>
+          <div class="screen" id="screen"></div>
+          <div class="homebar" aria-hidden="true"></div>
+        </div>
+        <div class="toast" id="toast" hidden></div>
+        <p class="phone-note" id="prototype-note"></p>
+      </section>
+
+      <aside class="panel-col">
+        <section class="panel" id="panel-context">
+          <h2 id="h-context"></h2>
+          <div class="row">
+            <label class="field grow"><span id="l-time"></span><input type="range" id="in-time" min="0" max="1439" step="5" value="615"><output id="out-time">10:15</output></label>
+          </div>
+          <div class="row wrap">
+            <label class="chip"><input type="radio" name="day" value="weekday" id="in-weekday" checked><span id="l-weekday"></span></label>
+            <label class="chip"><input type="radio" name="day" value="weekend" id="in-weekend"><span id="l-weekend"></span></label>
+            <label class="chip"><input type="checkbox" id="in-meeting"><span id="l-meeting"></span></label>
+            <label class="chip"><input type="checkbox" id="in-speed"><span id="l-speed"></span></label>
+          </div>
+          <div class="row wrap presets" id="presets"></div>
+          <div class="readout">
+            <div><span class="k" id="l-nowmode"></span><strong id="v-nowmode"></strong></div>
+            <div><span class="k" id="l-nowshield"></span><strong id="v-nowshield"></strong></div>
+            <p class="desc" id="v-modedesc"></p>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-dashboard">
+          <h2 id="h-dashboard"></h2>
+          <div id="dashboard"></div>
+        </section>
+
+        <section class="panel" id="panel-apps">
+          <h2 id="h-apps"></h2>
+          <div id="apps"></div>
+          <p class="desc"><span id="l-allowlist"></span>: <span id="v-allowlist"></span></p>
+        </section>
+
+        <section class="panel" id="panel-settings">
+          <h2 id="h-settings"></h2>
+          <div class="grid2">
+            <label class="field"><span id="l-sleep"></span><span class="pair"><input type="time" id="in-sleep-start"> – <input type="time" id="in-sleep-end"></span></label>
+            <label class="field"><span id="l-work"></span><span class="pair"><input type="time" id="in-work-start"> – <input type="time" id="in-work-end"></span></label>
+            <label class="field"><span id="l-cooldown"></span><input type="number" id="in-cooldown" min="0" max="240" step="1"></label>
+          </div>
+          <p class="desc" id="v-fatigue"></p>
+        </section>
+
+        <section class="panel" id="panel-card">
+          <h2 id="h-card"></h2>
+          <div class="card-wrap">
+            <canvas id="card" width="1080" height="1920"></canvas>
+            <div class="card-actions">
+              <button id="btn-card-png" type="button"></button>
+              <button id="btn-card-copy" type="button"></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-notes">
+          <h2 id="h-notes"></h2>
+          <div id="notes"></div>
+          <button id="btn-notes-md" type="button"></button>
+        </section>
+
+        <section class="panel danger-zone">
+          <button id="btn-reset" type="button" class="danger"></button>
+        </section>
+      </aside>
+    </main>
+  </div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
