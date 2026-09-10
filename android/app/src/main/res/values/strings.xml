@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HabitBridge</string>
+    <string name="app_tagline">Don\'t just block dopamine. Swap it intentionally.</string>
+    <string name="accessibility_label">HabitBridge (optional, faster detection)</string>
+    <string name="accessibility_description">Optional. HabitBridge is not an accessibility tool: it uses this service only to notice faster when one of the apps you selected opens, and to return you to the home screen after a micro-swap. Nothing is read from the screen and nothing leaves the device. HabitBridge also works without it (with about one second of delay).</string>
+
+    <!-- Notification -->
+    <string name="notif_channel">Detection</string>
+    <string name="notif_title">HabitBridge is watching your target apps</string>
+    <string name="notif_text">Screen on only · no network</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_targets">Targets</string>
+    <string name="nav_notes">Notes</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Onboarding / permissions -->
+    <string name="onb_title">Set up HabitBridge</string>
+    <string name="onb_intro">HabitBridge pauses you for a few seconds when a target app opens and offers a one-tap micro-swap instead. Everything stays on this device: there is no INTERNET permission at all.</string>
+    <string name="onb_required">Required</string>
+    <string name="onb_optional">Optional</string>
+    <string name="onb_granted">Granted</string>
+    <string name="onb_grant">Grant</string>
+    <string name="perm_usage_title">Usage access</string>
+    <string name="perm_usage_why">Lets HabitBridge notice which app is in front (screen on only). It does not read anything inside apps.</string>
+    <string name="perm_overlay_title">Display over other apps</string>
+    <string name="perm_overlay_why">Draws the pause screen on top of the target app.</string>
+    <string name="perm_notif_title">Notifications</string>
+    <string name="perm_notif_why">Android requires a quiet notification while detection runs.</string>
+    <string name="perm_a11y_title">Accessibility service (optional)</string>
+    <string name="perm_a11y_why">Faster detection and a clean return to home. Not an accessibility tool; nothing is read from the screen.</string>
+    <string name="perm_calendar_title">Calendar (optional)</string>
+    <string name="perm_calendar_why">Turns the shield to no-bypass during busy calendar events.</string>
+    <string name="perm_battery_title">Battery optimisation (recommended)</string>
+    <string name="perm_battery_why">Keeps detection alive on phones that kill background apps.</string>
+    <string name="onb_backup_note">Auto Backup includes your logs and quick notes so they move with you to a new phone.</string>
+    <string name="onb_continue">Continue</string>
+    <string name="onb_service_running">Detection service running</string>
+    <string name="onb_service_stopped">Detection service stopped</string>
+    <string name="onb_start_service">Start detection</string>
+
+    <!-- Dashboard -->
+    <string name="dash_focus">Focus Score</string>
+    <string name="dash_focus_formula">70% swap ratio (7 days) + 30% quota adherence (today)</string>
+    <string name="dash_no_data">No intercepts yet</string>
+    <string name="dash_today">Today</string>
+    <string name="dash_week">Last 7 days</string>
+    <string name="dash_swaps">Swaps</string>
+    <string name="dash_exits">Exits to home</string>
+    <string name="dash_bypasses">Bypasses</string>
+    <string name="dash_saved">Est. saved</string>
+    <string name="dash_minutes">%1$d min</string>
+    <string name="dash_streak">%1$d-day streak</string>
+    <string name="dash_swap_ratio">Swap ratio %1$d%%</string>
+    <string name="dash_recent">Recent</string>
+    <string name="dash_share_card">Share card</string>
+    <string name="dash_empty_hint">Add a target app and open it — the pause screen appears here on your phone.</string>
+    <string name="action_swapped">Swap</string>
+    <string name="action_bypassed">Bypass</string>
+    <string name="action_dismissed_home">Home</string>
+
+    <!-- Targets -->
+    <string name="targets_title">Target apps</string>
+    <string name="targets_hint">Enabled apps get the pause screen. Allow-listed apps never do.</string>
+    <string name="targets_shield">Shield</string>
+    <string name="targets_quota">Daily quota (min, 0 = none)</string>
+    <string name="targets_used_today">Used today: %1$d min</string>
+    <string name="targets_allowlist">Allow list</string>
+    <string name="targets_add">Add app</string>
+    <string name="targets_search">Search installed apps</string>
+    <string name="targets_remove">Remove</string>
+    <string name="targets_none">No targets yet. Tap “Add app”.</string>
+    <string name="targets_allowlist_none">Nothing allow-listed. Consider your messenger and maps.</string>
+    <string name="targets_make_allow">Allow list</string>
+    <string name="targets_make_target">Target</string>
+    <string name="shield_auto">Auto (context)</string>
+    <string name="shield_soft">SOFT · 3 s</string>
+    <string name="shield_normal">NORMAL · 5 s</string>
+    <string name="shield_hardcore">HARDCORE · no bypass</string>
+
+    <!-- Notes -->
+    <string name="notes_title">Quick inspiration log</string>
+    <string name="notes_empty">No notes yet. Choose “Quick note” on the pause screen.</string>
+    <string name="notes_export">Export today as Markdown</string>
+    <string name="notes_exported">Saved to Documents/HabitBridge/%1$s</string>
+    <string name="notes_export_failed">Could not save the file</string>
+    <string name="notes_instead_of">instead of %1$s</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Smart shield</string>
+    <string name="settings_sleep">Sleep window (no bypass)</string>
+    <string name="settings_work">Work hours (5 s)</string>
+    <string name="settings_workdays">Work days</string>
+    <string name="settings_cooldown">Cool-down after a bypass (minutes)</string>
+    <string name="settings_calendar">Use calendar (busy = no bypass)</string>
+    <string name="settings_calendar_needs_permission">Calendar permission not granted</string>
+    <string name="settings_fatigue">More than %1$d intercepts of one app in an hour soften the shield to SOFT.</string>
+    <string name="settings_permissions">Permissions &amp; service</string>
+    <string name="settings_privacy">Privacy: no INTERNET permission, no analytics, everything in a local database. Auto Backup includes notes.</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="settings_invalid_time">Use HH:MM (24 h)</string>
+    <string name="settings_start">Start</string>
+    <string name="settings_end">End</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_sun">Sun</string>
+
+    <!-- Interceptor overlay -->
+    <string name="ic_header">~/habitbridge/interceptor</string>
+    <string name="ic_title">[!] PAUSE AND REFLECT</string>
+    <string name="ic_target">Target</string>
+    <string name="ic_mode">Mode</string>
+    <string name="ic_quote">"Is this an intentional action or just a reflex?"</string>
+    <string name="ic_hold">HOLD ON…</string>
+    <string name="ic_hold_done">Time to decide</string>
+    <string name="ic_choose">CHOOSE A MICRO-SWAP INSTEAD:</string>
+    <string name="ic_exit">[ESC] Exit to home</string>
+    <string name="ic_continue">[&gt;] Continue to app</string>
+    <string name="ic_continue_wait">[&gt;] Continue in %1$d s</string>
+    <string name="ic_continue_locked">[×] %1$s: no bypass</string>
+    <string name="ic_quota_left">%1$d min of today\'s quota left</string>
+    <string name="ic_quota_out">Quota exhausted · swap or home only</string>
+    <string name="ic_cooldown_note">Continuing opens this app friction-free for %1$d min</string>
+    <string name="ic_back">← Pick another swap</string>
+    <string name="mode_sleep">Sleep</string>
+    <string name="mode_meeting">Meeting</string>
+    <string name="mode_work">Work hours</string>
+    <string name="mode_free">Free time</string>
+    <string name="mode_quota">Quota exhausted</string>
+
+    <!-- Swaps -->
+    <string name="swap_stretch">1-Min Posture Reset</string>
+    <string name="swap_stretch_desc">Deep breath + neck/shoulder stretch, 60 s</string>
+    <string name="swap_vocab">1 Vocab Word</string>
+    <string name="swap_vocab_desc">One flash card; done when you know it</string>
+    <string name="swap_note">Quick Inspiration Log</string>
+    <string name="swap_note_desc">One line → local .md log</string>
+    <string name="swap_emotion">Emotion Check-in</string>
+    <string name="swap_emotion_desc">One tap: why did you open it?</string>
+    <string name="stretch_breathe">Breathe in 4 s through the nose, out 6 s through the mouth</string>
+    <string name="stretch_neck_left">Tilt your head slowly to the left</string>
+    <string name="stretch_neck_right">Tilt your head slowly to the right</string>
+    <string name="stretch_shoulders">Raise your shoulders to your ears, then drop them</string>
+    <string name="stretch_chest">Clasp hands behind your back and open the chest</string>
+    <string name="stretch_eyes">Look at something far away for 20 seconds</string>
+    <string name="stretch_done">Posture reset complete</string>
+    <string name="stretch_finish">Done</string>
+    <string name="stretch_skip">Skip (does not count)</string>
+    <string name="vocab_flip">Show meaning</string>
+    <string name="vocab_got">Got it</string>
+    <string name="vocab_next">Another word</string>
+    <string name="note_placeholder">One line of whatever is on your mind…</string>
+    <string name="note_save">Save and go home</string>
+    <string name="note_hint">Appends to Documents/HabitBridge/Notes_YYYYMMDD.md when you export.</string>
+    <string name="emotion_question">Why did you open this app?</string>
+    <string name="emotion_bored">Bored</string>
+    <string name="emotion_anxious">Anxious / stressed</string>
+    <string name="emotion_lonely">Lonely</string>
+    <string name="emotion_habit">Just habit</string>
+    <string name="emotion_tired">Tired</string>
+    <string name="toast_swapped">Swapped · back home · +%1$d min</string>
+    <string name="toast_home_failed">Press Home to leave the app</string>
+
+    <!-- Share card -->
+    <string name="card_title">DOPAMINE SWAP REPORT</string>
+    <string name="card_saved">MINUTES SAVED</string>
+    <string name="card_ratio">SWAP RATIO</string>
+    <string name="card_streak">DAY STREAK</string>
+    <string name="card_footer">habitbridge · local-first · no server</string>
+    <string name="card_share_via">Share your report</string>
+</resources>

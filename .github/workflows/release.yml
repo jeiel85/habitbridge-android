@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Tests
+        run: ./gradlew :core:policy:test --no-daemon
+      - name: Decode release keystore
+        if: ${{ secrets.RELEASE_KEYSTORE_BASE64 != '' }}
+        run: echo "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 -d > release.keystore
+      - name: Assemble release APK + AAB
+        env:
+          KEYSTORE_PATH: ${{ github.workspace }}/android/release.keystore
+          STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: ./gradlew :app:assembleRelease :app:bundleRelease --no-daemon
+      - name: Rename artifacts
+        run: |
+          VER="${GITHUB_REF_NAME#v}"
+          mkdir -p out
+          cp app/build/outputs/apk/release/app-release*.apk "out/habitbridge-${VER}.apk" 2>/dev/null || cp app/build/outputs/apk/release/*.apk "out/habitbridge-${VER}.apk"
+          cp app/build/outputs/bundle/release/app-release.aab "out/habitbridge-${VER}.aab"
+          ls -la out
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            android/out/*.apk
+            android/out/*.aab
+          generate_release_notes: true

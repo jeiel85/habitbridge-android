@@ -3,3 +3,14 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Android build outputs & secrets
+android/.gradle/
+android/build/
+android/**/build/
+android/local.properties
+android/.keystore/
+android/release.keystore
+*.jks
+*.keystore
+android/.kotlin/

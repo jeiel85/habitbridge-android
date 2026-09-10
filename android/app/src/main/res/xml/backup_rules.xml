@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Auto Backup includes the Room database (logs, notes, settings). Disclosed in onboarding (PRD §5). -->
+<full-backup-content>
+    <include domain="database" path="." />
+    <exclude domain="database" path="habitbridge.db-wal" />
+    <exclude domain="database" path="habitbridge.db-shm" />
+</full-backup-content>

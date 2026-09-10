@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HabitBridge</string>
+    <string name="app_tagline">도파민을 무작정 막지 마세요. 가치 있는 마이크로 행동으로 스왑하세요.</string>
+    <string name="accessibility_label">HabitBridge (선택, 더 빠른 감지)</string>
+    <string name="accessibility_description">선택 사항입니다. HabitBridge는 접근성 도구가 아니며, 이 서비스를 오직 두 가지에만 씁니다: 사용자가 고른 앱이 열리는 것을 더 빨리 알아채기, 마이크로 스왑 뒤 홈 화면으로 돌아가기. 화면 내용을 읽지 않고, 아무것도 기기 밖으로 내보내지 않습니다. 이 서비스 없이도 동작합니다(약 1초 지연).</string>
+
+    <string name="notif_channel">감지</string>
+    <string name="notif_title">HabitBridge가 대상 앱을 지켜보는 중</string>
+    <string name="notif_text">화면이 켜진 동안만 · 네트워크 사용 없음</string>
+
+    <string name="nav_dashboard">대시보드</string>
+    <string name="nav_targets">대상 앱</string>
+    <string name="nav_notes">메모</string>
+    <string name="nav_settings">설정</string>
+
+    <string name="onb_title">HabitBridge 설정</string>
+    <string name="onb_intro">대상 앱을 켜는 순간 몇 초 멈춤을 주고, 대신 1탭 마이크로 스왑을 제안합니다. 모든 것은 이 기기 안에 남습니다. INTERNET 권한 자체가 없습니다.</string>
+    <string name="onb_required">필수</string>
+    <string name="onb_optional">선택</string>
+    <string name="onb_granted">허용됨</string>
+    <string name="onb_grant">허용하기</string>
+    <string name="perm_usage_title">사용 정보 접근</string>
+    <string name="perm_usage_why">어떤 앱이 앞에 있는지 알아채는 데 씁니다(화면 켜짐 시만). 앱 안의 내용은 읽지 않습니다.</string>
+    <string name="perm_overlay_title">다른 앱 위에 표시</string>
+    <string name="perm_overlay_why">대상 앱 위에 멈춤 화면을 그립니다.</string>
+    <string name="perm_notif_title">알림</string>
+    <string name="perm_notif_why">감지가 실행되는 동안 안드로이드가 조용한 알림 하나를 요구합니다.</string>
+    <string name="perm_a11y_title">접근성 서비스 (선택)</string>
+    <string name="perm_a11y_why">더 빠른 감지와 깔끔한 홈 복귀. 접근성 도구가 아니며 화면을 읽지 않습니다.</string>
+    <string name="perm_calendar_title">캘린더 (선택)</string>
+    <string name="perm_calendar_why">바쁨 일정 중에는 우회 불가 쉴드로 전환합니다.</string>
+    <string name="perm_battery_title">배터리 최적화 제외 (권장)</string>
+    <string name="perm_battery_why">백그라운드 앱을 종료하는 기기에서 감지를 살려 둡니다.</string>
+    <string name="onb_backup_note">자동 백업에 기록과 퀵 메모가 포함되어 새 기기로 함께 이동합니다.</string>
+    <string name="onb_continue">계속</string>
+    <string name="onb_service_running">감지 서비스 실행 중</string>
+    <string name="onb_service_stopped">감지 서비스 중지됨</string>
+    <string name="onb_start_service">감지 시작</string>
+
+    <string name="dash_focus">Focus Score</string>
+    <string name="dash_focus_formula">70% × 7일 스왑 비율 + 30% × 오늘 할당 준수</string>
+    <string name="dash_no_data">아직 개입 기록이 없습니다</string>
+    <string name="dash_today">오늘</string>
+    <string name="dash_week">최근 7일</string>
+    <string name="dash_swaps">스왑</string>
+    <string name="dash_exits">홈 복귀</string>
+    <string name="dash_bypasses">우회</string>
+    <string name="dash_saved">절약 추정</string>
+    <string name="dash_minutes">%1$d분</string>
+    <string name="dash_streak">연속 %1$d일</string>
+    <string name="dash_swap_ratio">스왑 비율 %1$d%%</string>
+    <string name="dash_recent">최근 기록</string>
+    <string name="dash_share_card">공유 카드</string>
+    <string name="dash_empty_hint">대상 앱을 추가하고 열어 보세요. 멈춤 화면이 그 앱 위에 나타납니다.</string>
+    <string name="action_swapped">스왑</string>
+    <string name="action_bypassed">우회</string>
+    <string name="action_dismissed_home">홈</string>
+
+    <string name="targets_title">대상 앱</string>
+    <string name="targets_hint">켜진 앱에는 멈춤 화면이 뜹니다. 허용 목록 앱에는 절대 뜨지 않습니다.</string>
+    <string name="targets_shield">쉴드</string>
+    <string name="targets_quota">일일 할당(분, 0 = 없음)</string>
+    <string name="targets_used_today">오늘 사용: %1$d분</string>
+    <string name="targets_allowlist">허용 목록</string>
+    <string name="targets_add">앱 추가</string>
+    <string name="targets_search">설치된 앱 검색</string>
+    <string name="targets_remove">제거</string>
+    <string name="targets_none">아직 대상 앱이 없습니다. “앱 추가”를 누르세요.</string>
+    <string name="targets_allowlist_none">허용 목록이 비어 있습니다. 메신저와 지도를 넣어 두세요.</string>
+    <string name="targets_make_allow">허용 목록</string>
+    <string name="targets_make_target">대상</string>
+    <string name="shield_auto">자동(상황 인지)</string>
+    <string name="shield_soft">SOFT · 3초</string>
+    <string name="shield_normal">NORMAL · 5초</string>
+    <string name="shield_hardcore">HARDCORE · 우회 불가</string>
+
+    <string name="notes_title">영감 퀵 메모</string>
+    <string name="notes_empty">아직 메모가 없습니다. 멈춤 화면에서 “퀵 메모”를 고르세요.</string>
+    <string name="notes_export">오늘 메모를 마크다운으로 내보내기</string>
+    <string name="notes_exported">Documents/HabitBridge/%1$s 에 저장했습니다</string>
+    <string name="notes_export_failed">파일을 저장하지 못했습니다</string>
+    <string name="notes_instead_of">%1$s 대신</string>
+
+    <string name="settings_title">스마트 쉴드</string>
+    <string name="settings_sleep">취침 시간대 (우회 불가)</string>
+    <string name="settings_work">업무 시간 (5초)</string>
+    <string name="settings_workdays">업무 요일</string>
+    <string name="settings_cooldown">우회 후 쿨다운(분)</string>
+    <string name="settings_calendar">캘린더 사용 (바쁨 = 우회 불가)</string>
+    <string name="settings_calendar_needs_permission">캘린더 권한이 없습니다</string>
+    <string name="settings_fatigue">한 앱이 한 시간에 %1$d회 넘게 개입되면 쉴드를 SOFT로 완화합니다.</string>
+    <string name="settings_permissions">권한 및 서비스</string>
+    <string name="settings_privacy">프라이버시: INTERNET 권한 없음, 분석 SDK 없음, 모든 데이터는 기기 내 DB에만. 자동 백업에 메모가 포함됩니다.</string>
+    <string name="settings_version">버전 %1$s</string>
+    <string name="settings_invalid_time">HH:MM (24시간) 형식으로 입력하세요</string>
+    <string name="settings_start">시작</string>
+    <string name="settings_end">종료</string>
+    <string name="day_mon">월</string>
+    <string name="day_tue">화</string>
+    <string name="day_wed">수</string>
+    <string name="day_thu">목</string>
+    <string name="day_fri">금</string>
+    <string name="day_sat">토</string>
+    <string name="day_sun">일</string>
+
+    <string name="ic_header">~/habitbridge/interceptor</string>
+    <string name="ic_title">[!] PAUSE AND REFLECT</string>
+    <string name="ic_target">Target</string>
+    <string name="ic_mode">Mode</string>
+    <string name="ic_quote">"이건 의도한 행동인가, 그냥 반사인가?"</string>
+    <string name="ic_hold">HOLD ON…</string>
+    <string name="ic_hold_done">결정할 시간</string>
+    <string name="ic_choose">CHOOSE A MICRO-SWAP INSTEAD:</string>
+    <string name="ic_exit">[ESC] 홈으로 나가기</string>
+    <string name="ic_continue">[&gt;] 앱 계속하기</string>
+    <string name="ic_continue_wait">[&gt;] %1$d초 후 계속 가능</string>
+    <string name="ic_continue_locked">[×] %1$s: 우회 불가</string>
+    <string name="ic_quota_left">오늘 남은 할당 %1$d분</string>
+    <string name="ic_quota_out">오늘 할당 소진 · 스왑 또는 홈만 가능</string>
+    <string name="ic_cooldown_note">계속하면 %1$d분 동안 이 앱은 마찰 없이 열립니다</string>
+    <string name="ic_back">← 다른 스왑 고르기</string>
+    <string name="mode_sleep">취침</string>
+    <string name="mode_meeting">회의 중</string>
+    <string name="mode_work">업무 시간</string>
+    <string name="mode_free">일상</string>
+    <string name="mode_quota">할당 소진</string>
+
+    <string name="swap_stretch">1분 자세 리셋</string>
+    <string name="swap_stretch_desc">깊은 호흡 + 목·어깨 스트레칭 60초</string>
+    <string name="swap_vocab">단어 1개</string>
+    <string name="swap_vocab_desc">영단어 카드 1장, 외우면 완료</string>
+    <string name="swap_note">영감 퀵 메모</string>
+    <string name="swap_note_desc">한 줄 메모 → 로컬 .md 로그</string>
+    <string name="swap_emotion">감정 체크인</string>
+    <string name="swap_emotion_desc">왜 열었는지 한 번 탭</string>
+    <string name="stretch_breathe">코로 4초 들이쉬고, 입으로 6초 내쉬세요</string>
+    <string name="stretch_neck_left">고개를 왼쪽으로 천천히 기울이세요</string>
+    <string name="stretch_neck_right">고개를 오른쪽으로 천천히 기울이세요</string>
+    <string name="stretch_shoulders">어깨를 귀까지 올렸다가 툭 떨어뜨리세요</string>
+    <string name="stretch_chest">양손을 뒤로 깍지 끼고 가슴을 펴세요</string>
+    <string name="stretch_eyes">먼 곳을 20초 바라보세요</string>
+    <string name="stretch_done">자세 리셋 완료</string>
+    <string name="stretch_finish">완료</string>
+    <string name="stretch_skip">건너뛰기 (완료 처리 안 됨)</string>
+    <string name="vocab_flip">뜻 보기</string>
+    <string name="vocab_got">외웠다</string>
+    <string name="vocab_next">다른 단어</string>
+    <string name="note_placeholder">지금 떠오른 생각 한 줄…</string>
+    <string name="note_save">저장하고 홈으로</string>
+    <string name="note_hint">내보내기를 누르면 Documents/HabitBridge/Notes_YYYYMMDD.md 에 쌓입니다.</string>
+    <string name="emotion_question">지금 이 앱을 연 이유는?</string>
+    <string name="emotion_bored">지루함</string>
+    <string name="emotion_anxious">불안·스트레스</string>
+    <string name="emotion_lonely">외로움</string>
+    <string name="emotion_habit">그냥 습관</string>
+    <string name="emotion_tired">피곤함</string>
+    <string name="toast_swapped">스왑 완료 · 홈으로 · +%1$d분</string>
+    <string name="toast_home_failed">홈 버튼을 눌러 앱을 벗어나세요</string>
+
+    <string name="card_title">DOPAMINE SWAP REPORT</string>
+    <string name="card_saved">MINUTES SAVED</string>
+    <string name="card_ratio">SWAP RATIO</string>
+    <string name="card_streak">DAY STREAK</string>
+    <string name="card_footer">habitbridge · local-first · no server</string>
+    <string name="card_share_via">리포트 공유</string>
+</resources>

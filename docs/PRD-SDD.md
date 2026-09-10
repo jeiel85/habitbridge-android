@@ -1,14 +1,15 @@
 # [PRD / SDD] HabitBridge: Intentional Friction & Micro-Swap — 제품·시스템 설계서
 
-- **문서 버전**: v1.1.0 (2026-09-10) · 원본 v1.0.0(2026-09-09)은 [`docs/archive/`](archive/2026-09-09_PRD-SDD_v1.0.0_original.md)에 그대로 보관
+- **문서 버전**: v1.1.1 (2026-09-10) · 원본 v1.0.0(2026-09-09)은 [`docs/archive/`](archive/2026-09-09_PRD-SDD_v1.0.0_original.md)에 그대로 보관
 - **변경 요약**: [`docs/CHANGELOG.md`](CHANGELOG.md) · 되돌리기 어려운 결정: [`docs/DECISIONS.md`](DECISIONS.md) · 미뤄둔 개선점: [`docs/BACKLOG.md`](BACKLOG.md)
 - **프로젝트 명**: HabitBridge (해빗브릿지) — "Don't just block dopamine. Swap it intentionally."
 - **플랫폼**: Android 1차(Kotlin / Jetpack Compose, minSdk 26 · target 최신). iOS는 §10.3에서 별도 판단
 - **라이브 데모(웹 프로토타입)**: <https://jeiel85.github.io/habitbridge-android/> — 정책 엔진과 인터셉터 UX를 브라우저 폰 시뮬레이터로 체험
+- **안드로이드 앱**: [`android/`](../android/) (Kotlin · Jetpack Compose · Room), 릴리스 APK/AAB는 [GitHub Releases](https://github.com/jeiel85/habitbridge-android/releases), 빌드·검증 절차는 [`RELEASE.md`](../RELEASE.md)
 - **문서 목적**: 기존 스크린타임·디지털 디톡스 앱의 결함(차단 후 공백, 마찰 피로, 구독 강요, 프라이버시)을 극복하는 제품을, **규칙·수치·권한 정책·데이터 모델·검증 계획까지 즉시 구현 착수 가능한 수준**으로 확정한다.
 
 > **상태 표기 규칙**
-> ✅ **검증됨** — 웹 프로토타입(정책 엔진 + 시뮬레이터)에 구현되어 테스트·플레이로 확인한 항목
+> ✅ **검증됨** — 웹 프로토타입 또는 안드로이드 앱 v1.0.0에 구현되어 테스트·실행으로 확인한 항목 (안드로이드 전용 검증은 📱로 표기)
 > 🔧 **확정(미구현)** — 설계는 확정했고 안드로이드 구현에서 만들 항목
 > 💭 **검토 중** — 대안이 남아 있어 실사용 테스트 결과로 결정할 항목
 
@@ -25,7 +26,7 @@
 | 대상 사용자 | 하루 2시간 이상 숏폼을 "무의식적으로" 보는 20~40대, 이미 차단 앱을 써봤다가 2주 안에 지운 사람 |
 | 핵심 지표 | 2주 유지율 ≥ 60%, 권한 해제율 ≤ 20%, 스왑 비율(스왑+홈 복귀 ÷ 개입) ≥ 40%, 1점 리뷰 사유 "짜증" 비중 감소 |
 | 가격 | 1회 결제(가격은 §8.1에서 💭), 구독·광고·데이터 판매 없음 |
-| 현재 상태 | 정책 엔진(개입 판정·쉴드·쿨다운·할당·Focus Score)과 인터셉터·스왑 4종·대시보드·공유 카드·.md 익스포트가 브라우저 시뮬레이터로 동작. 안드로이드 구현 전 |
+| 현재 상태 | **안드로이드 앱 v1.0.0 구현 완료**(`android/`): UsageStats 감지 서비스 + 선택적 접근성 서비스, 오버레이 인터셉터, 스왑 4종, Room, 대시보드·공유 카드·.md 내보내기, 온보딩. 에뮬레이터(API 36)에서 개입→스왑→홈 복귀·우회→쿨다운·내보내기 검증. 웹 시뮬레이터는 설계 검증용으로 유지 |
 
 ---
 
@@ -89,7 +90,7 @@
 
 ---
 
-## 4. 기능 명세 ✅
+## 4. 기능 명세 ✅ (웹 시뮬레이터 + 안드로이드 v1.0.0)
 
 ### 4.1 인터셉션 규칙 — 언제 개입하는가 (`src/engine.js` `decide`)
 
@@ -201,7 +202,7 @@
 - 포맷: `# HabitBridge Notes YYYY-MM-DD` 아래 `- [HH:MM] 내용 _(instead of Instagram)_`.
 - 내보낸 메모는 `isExportedToMd = true`. 같은 날 재내보내기는 파일을 통째로 다시 쓴다(부분 추가 대신 멱등).
 
-### 4.10 온보딩·권한 플로우 🔧
+### 4.10 온보딩·권한 플로우 ✅📱
 
 | 단계 | 권한 | 필수 | 거부 시 |
 | :-- | :-- | :-- | :-- |
@@ -232,7 +233,7 @@
 
 ---
 
-## 5. 데이터 모델 (Room) 🔧 — 원본 정정판
+## 5. 데이터 모델 (Room) ✅📱 — 원본 정정판 (v1.0.0 스키마 = 아래, `android/app/schemas/`에 내보냄)
 
 ```kotlin
 enum class ShieldLevel { AUTO, SOFT, NORMAL, HARDCORE }     // 원본 String → enum, AUTO 추가
@@ -300,7 +301,7 @@ data class VocabEntity(@PrimaryKey val id: Int, val word: String, val meaning: S
 
 ---
 
-## 6. 시스템 아키텍처 (Android) 🔧
+## 6. 시스템 아키텍처 (Android) ✅📱 (v1.0.0 구현 기준, 미구현 항목은 🔧 표시)
 
 ### 6.1 포그라운드 앱 감지 — 두 경로
 
@@ -309,7 +310,9 @@ data class VocabEntity(@PrimaryKey val id: Int, val word: String, val meaning: S
 | **A. UsageStatsManager 폴링** (`queryEvents`, 화면 켜짐 시 1초 주기) | ~1초 | `PACKAGE_USAGE_STATS` (설정 화면) | 낮음: Play 정책상 허용된 용도(디지털 웰빙) | **주 경로** |
 | B. AccessibilityService (`TYPE_WINDOW_STATE_CHANGED`) | 즉시 | 접근성 설정 | 높음: Google Play는 접근성 API를 접근성 목적 외에 쓰는 앱에 **선언 양식·심사**를 요구하며 거절 사례가 많음 | **선택 경로** (저지연·홈 복귀 품질용) |
 
-원본 v1.0.0은 B 단일 경로였다. A를 주 경로로 두고 B는 "켜면 더 빨라집니다"로 제공한다. 두 경로 모두 같은 `ForegroundEvent(pkg, at)`를 정책 엔진에 흘린다. 상세 근거는 [`DECISIONS.md` D-001](DECISIONS.md).
+원본 v1.0.0은 B 단일 경로였다. A를 주 경로로 두고 B는 "켜면 더 빨라집니다"로 제공한다. 두 경로 모두 같은 `InterceptCoordinator.onForeground(pkg, source)`로 들어온다. 상세 근거는 [`DECISIONS.md` D-001](DECISIONS.md).
+
+✅📱 v1.0.0: A = `detect/DetectionService.kt`(화면 켜짐 시 1초 `queryEvents`, `specialUse` 포그라운드 서비스), B = `detect/HabitAccessibilityService.kt`(액티비티 윈도우 전환만, 콘텐츠 미조회). 런처 판정은 **기본 홈 앱 하나**만 사용한다 — HOME 인텐트를 받는 모든 액티비티를 런처로 보면 시스템 설정 앱(`FallbackHome`)까지 제외되는 버그가 있었다.
 
 ### 6.2 오버레이
 
@@ -321,26 +324,28 @@ data class VocabEntity(@PrimaryKey val id: Int, val word: String, val meaning: S
 ### 6.3 홈 복귀
 
 - 원본의 `context.startActivity(HOME 인텐트)`는 **백그라운드에서의 액티비티 시작 제한**(Android 10+)에 걸릴 수 있다. `SYSTEM_ALERT_WINDOW` 보유는 문서상 예외 조건 중 하나지만 버전별로 축소되는 추세라 의존하지 않는다.
-- 결정: 접근성 서비스가 켜져 있으면 `performGlobalAction(GLOBAL_ACTION_HOME)`; 아니면 HOME 인텐트를 시도하고 **실패 시 오버레이를 유지한 채 "홈 버튼을 눌러 주세요" 안내**로 폴백. 어느 경우든 기록은 동일.
+- 결정: 접근성 서비스가 켜져 있으면 `performGlobalAction(GLOBAL_ACTION_HOME)`; 아니면 HOME 인텐트를 시도하고 **실패 시 "홈 버튼을 눌러 주세요" 토스트**로 폴백. 어느 경우든 기록은 동일.
+- ✅📱 v1.0.0 검증: API 36 에뮬레이터에서 접근성 없이 HOME 인텐트 경로로 스왑 완료 직후 런처 복귀 확인(`SYSTEM_ALERT_WINDOW` 보유 예외). 접근성 경로는 구현했으나 실기기 검증은 P1 항목.
 
 ### 6.4 프로세스 생존과 OEM
 
 - 포그라운드 서비스(Android 14+: `foregroundServiceType="specialUse"` + 선언 사유). 알림은 최소 중요도, "감지 중 · 네트워크 사용 없음" 한 줄.
 - `BOOT_COMPLETED` 리시버, 화면 꺼짐 시 폴링 중단(배터리), 켜짐 시 재개.
-- 삼성·샤오미 등 OEM 백그라운드 제한은 온보딩 안내 카드로 대응(dontkillmyapp 기준). 해결 못 하면 "감지가 늦을 수 있음"을 솔직히 표시.
+- 삼성·샤오미 등 OEM 백그라운드 제한은 온보딩 안내 카드로 대응(dontkillmyapp 기준). 해결 못 하면 "감지가 늦을 수 있음"을 솔직히 표시. 🔧 v1.0.0에는 배터리 최적화 제외 요청만 있고 OEM별 카드는 미구현(BACKLOG).
 
-### 6.5 모듈 구조 (Clean Architecture + MVI)
+### 6.5 모듈 구조 ✅📱 (v1.0.0: 설계의 6모듈을 2모듈로 축소)
 
 ```
-:app                      Compose UI, 온보딩, 대시보드, 설정
-:feature:interceptor      오버레이 서비스, 인터셉터 화면, 스왑 4종
-:core:policy              ★ 순수 Kotlin. decide / evaluateContext / stats / focusScore
-:core:data                Room, DAO, Repository, MediaStore 익스포트
-:core:detect              UsageStats 폴러, (선택) AccessibilityService 어댑터
-:core:designsystem        Material3 다크 + 모노스페이스 테마
+android/core/policy      ★ 순수 Kotlin(JVM). Policy.decide / evaluateContext / stats / focusScore / notesMarkdown — 웹 engine.js와 1:1, PolicyTest 12건
+android/app
+  data/                  Room 엔티티·DAO·AppDatabase(스키마 내보내기)·HabitRepository
+  detect/                DetectionService(UsageStats 폴러), HabitAccessibilityService(선택), InterceptCoordinator, BootReceiver
+  overlay/               OverlayController(WindowManager + ComposeView 수명주기), InterceptorScreen(대기·스왑 4종)
+  ui/                    MainActivity(탭 4개), Onboarding/Dashboard/Targets/Notes/Settings 화면, Theme
+  util/                  Permissions, CalendarSignal, InstalledApps, NotesExporter(MediaStore/SAF), ShareCard(Canvas→Bitmap)
 ```
 
-`:core:policy`는 웹 프로토타입의 `src/engine.js`와 **함수 단위 1:1**이며, 같은 테스트 벡터(`tests/engine.test.js`의 케이스)를 Kotlin 테스트로 옮겨 동작 일치를 보장한다(부록 C).
+1인 개발 규모에서 `:feature:*`·`:core:data` 분리는 빌드 시간만 늘리고 경계는 패키지로 충분하다(아키텍처 최소주의). 정책 엔진만 별도 모듈로 격리한 것이 핵심이다.
 
 ### 6.6 배터리·성능 예산
 
@@ -402,7 +407,9 @@ data class VocabEntity(@PrimaryKey val id: Int, val word: String, val meaning: S
 ## 10. 로드맵
 
 ### 10.1 현재까지 (2026-09-10)
-- ✅ 정책 엔진(순수 JS) + 테스트 11건, 폰 시뮬레이터(인터셉터·스왑 4종·상황 시뮬레이터·대시보드·공유 카드·.md 익스포트), KR/EN, GitHub Pages.
+- ✅ 정책 엔진(순수 JS) + 테스트 12건, 폰 시뮬레이터(인터셉터·스왑 4종·상황 시뮬레이터·대시보드·공유 카드·.md 익스포트), KR/EN, GitHub Pages.
+- ✅📱 **안드로이드 앱 v1.0.0** (`android/`): `:core:policy` Kotlin 포팅 + 동일 테스트 벡터 12건, UsageStats 감지 서비스·선택적 접근성 서비스, 오버레이 인터셉터(HOLD·스왑 4종·우회 잠금), Room 7테이블, 온보딩·권한 플로우, 대시보드(Focus Score·연속 일수), 공유 카드(1080×1920 공유 시트), 메모 .md 내보내기(MediaStore, API<29 SAF), 부팅 재시작, KR/EN. 서명된 릴리스 APK/AAB + GitHub Actions 릴리스 파이프라인.
+- 📱 에뮬레이터(Pixel 7, API 36) 검증: 온보딩 → 대상 추가 → 개입 → 감정 체크인/퀵 메모 스왑 → 홈 복귀 → 대시보드 반영, NORMAL 5초 후 우회 → 10분 쿨다운 통과, `Documents/HabitBridge/Notes_YYYYMMDD.md` 생성. 시스템 설정 앱은 오버레이를 숨기므로(OS 정책) 대상에서 제외됨을 확인.
 
 ### 10.2 안드로이드 스프린트 (원본 4스프린트 유지, 게이트 추가)
 
@@ -461,15 +468,18 @@ iOS는 서드파티가 다른 앱 위에 오버레이를 그리거나 포그라�
 | 버전 | 일자 | 내용 |
 | :-- | :-- | :-- |
 | v1.0.0 | 2026-09-09 | 최초 작성(레퍼런스 분석, 가치 제안, 스왑 4종, 와이어프레임, 아키텍처 플로우, Room 엔티티, 오버레이 코드, 4스프린트) |
+| v1.1.1 | 2026-09-10 | 안드로이드 v1.0.0 구현 반영: 상태 표기(📱), §6 구현 파일·검증 결과, 모듈 구조 축소(6→2), 런처 판정 버그 기록, 부록 C 실제 파일 매핑 |
 | v1.1.0 | 2026-09-10 | 개입·쉴드·상황 규칙 정밀화, Focus Score·연속 일수 정의, 엣지케이스, 데이터 모델 정정, 감지 경로 이원화(Play 정책), 오버레이 플래그·홈 복귀 정정, 권한 플로우, 프라이버시 모순 해소, 가격 재검토, 검증 계획·리스크 추가. 웹 프로토타입으로 ✅ 검증 |
 
-## 부록 C. 웹 프로토타입 ↔ 안드로이드 매핑
+## 부록 C. 웹 프로토타입 ↔ 안드로이드 매핑 (v1.0.0 실제 파일)
 
-| 웹 (`src/`) | 안드로이드 모듈 | 비고 |
+| 웹 (`src/`) | 안드로이드 (`android/`) | 비고 |
 | :-- | :-- | :-- |
-| `engine.js` decide / evaluateContext / stats / focusScore / notesMarkdown | `:core:policy` | 함수 1:1, 테스트 벡터 공유 |
-| `data.js` 기본값 | `SettingsEntity` 기본값, `VocabEntity` 시드 | 수치 단일 원천 |
-| `app.js` 인터셉터 화면 | `:feature:interceptor` Compose | 상태·버튼 규칙 동일(§4.4) |
-| `app.js` 상황 시뮬레이터 | 없음(실기기 시각·캘린더) | 테스트 전용 |
-| Canvas 공유 카드 | Compose → Bitmap | 레이아웃 동일 |
-| localStorage | Room | 스키마 §5 |
+| `engine.js` decide / evaluateContext / stats / focusScore / notesMarkdown | `core/policy/.../Policy.kt` | 함수 1:1, `tests/engine.test.js` ↔ `PolicyTest.kt` 12건 |
+| `data.js` 기본값 | `data/Entities.kt` `SettingsEntity` 기본값, `data/VocabSeed.kt` | 수치 단일 원천 |
+| `app.js` 인터셉터 화면 | `overlay/InterceptorScreen.kt` + `overlay/OverlayController.kt` | 상태·버튼 규칙 동일(§4.4) |
+| `app.js` 상황 시뮬레이터(시각·회의) | 실기기 시각 + `util/CalendarSignal.kt` | 테스트 전용 UI 없음 |
+| `app.js` 가짜 앱 사용량 | `detect/InterceptCoordinator.tickUsage` (포그라운드 1초 누적) | UsageStats 집계 대신 자체 누적 |
+| Canvas 공유 카드 | `util/ShareCard.kt` (Canvas → Bitmap → FileProvider 공유) | 레이아웃 동일 |
+| `.md` 다운로드 | `util/NotesExporter.kt` (MediaStore Documents/HabitBridge, API<29 SAF) | 같은 날 재내보내기 시 덮어쓰기 |
+| localStorage | Room `AppDatabase` (7 테이블, 스키마 v1 내보냄) | §5 |

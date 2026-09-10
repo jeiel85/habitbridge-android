@@ -1,4 +1,27 @@
-# 문서·프로토타입 변경 이력
+# 문서·프로토타입·앱 변경 이력
+
+## 안드로이드 앱 v1.0.0 — 2026-09-10
+
+설계서 §10.2 스프린트 1~4를 한 번에 구현한 첫 릴리스. `android/`.
+
+- `:core:policy` — `Policy.kt`(웹 `engine.js` 1:1 포팅), `PolicyTest.kt` 12건(웹 테스트 벡터 동일).
+- 감지 — `DetectionService`(UsageStats 1초 폴링, 화면 켜짐 시만, `specialUse` FGS, 부팅/업데이트 재시작), `HabitAccessibilityService`(선택, 윈도우 전환만 관찰, `performGlobalAction(HOME)`).
+- 개입 — `OverlayController`(서비스 컨텍스트의 ComposeView 수명주기 소유자, 포커스 가능 오버레이), `InterceptorScreen`(HOLD 진행 바·스왑 4종·우회 잠금), 앱 전환 시 자동 해제(DISMISSED_HOME 기록).
+- 데이터 — Room 7테이블(§5 그대로, `schemas/` 내보내기), 시드 단어 12개, 자동 백업 포함.
+- UI — 온보딩(권한 6단계), 대시보드(Focus Score·오늘/7일·최근), 대상 앱(설치 앱 검색·쉴드·할당·허용 목록), 메모(.md 내보내기: MediaStore, API<29 SAF), 설정(시간대·요일·쿨다운·캘린더·권한 상태·서비스 제어), 공유 카드 공유 시트.
+- 릴리스 — 서명된 APK/AAB, GitHub Actions(`android-ci.yml`, `release.yml`), `RELEASE.md`.
+
+설계 대비 달라진 점(의도적):
+
+| 설계 | 구현 | 이유 |
+| :-- | :-- | :-- |
+| 6개 Gradle 모듈(§6.5) | `:core:policy` + `:app`(패키지 분리) | 1인 개발에서 모듈 분리는 빌드 시간만 늘림. 정책 엔진 격리가 핵심 |
+| UsageStats 집계로 사용 시간 산출 | 폴러가 포그라운드 대상 앱의 초를 직접 누적 | 개입 규칙과 같은 시계·같은 판정 기준을 쓰기 위해 |
+| OEM별 백그라운드 안내 카드 | 배터리 최적화 제외 요청만 | P1 실기기 결과 후 작성(BACKLOG) |
+| 텔레메트리(옵트인) | 없음 | P2 전에는 측정 항목 확정 안 됨 |
+
+구현 중 발견한 결함: HOME 인텐트를 받는 모든 액티비티를 런처로 취급하자 시스템 설정 앱(`FallbackHome`)이 조용히 제외되었다. 기본 홈 앱 하나만 런처로 판정하도록 수정하고 PRD §6.1에 기록.
+
 
 ## PRD/SDD v1.1.0 — 2026-09-10
 
