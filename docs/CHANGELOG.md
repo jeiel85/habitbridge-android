@@ -1,5 +1,9 @@
 # 문서·프로토타입·앱 변경 이력
 
+## 웹 시뮬레이터 PWA — 2026-10-20
+
+- GitHub Pages의 폰 시뮬레이터를 설치형 PWA로: `manifest.webmanifest`, `sw.js`(내비게이션 network-first·정적 자산 stale-while-revalidate, 오프라인 시 캐시된 셸), `icons/`(파비콘 다리 모양을 192·512·maskable·apple-touch로).
+
 ## 안드로이드 앱 v1.0.0 — 2026-09-10
 
 설계서 §10.2 스프린트 1~4를 한 번에 구현한 첫 릴리스. `android/`.
